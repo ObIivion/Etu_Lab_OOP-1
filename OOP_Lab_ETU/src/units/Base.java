@@ -5,6 +5,7 @@ import factories.CavalryFactory;
 import factories.InfantryFactory;
 import supportingFiles.CheckInputService;
 import game.GameField;
+import supportingFiles.Coordinates;
 
 public class Base extends FieldObject {
 	protected int HP;
@@ -13,7 +14,8 @@ public class Base extends FieldObject {
 	
 	public Base(GameField gameField){
 		this.picture = "B";
-		gameField.addBase(this);
+		Coordinates coord = gameField.addBase(this);
+		gameField.SetBaseCoords(coord);
 	}
 	
 	public int createUnit(GameField gameField){

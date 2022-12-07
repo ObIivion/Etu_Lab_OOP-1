@@ -11,6 +11,7 @@ public class GameField {
     private int width;
     private int height;
     private int numberOfUnits = 0;
+    private Coordinates baseCoord;
     private ArrayList<BaseUnit> listOfUnits = new ArrayList<BaseUnit>();
     
 
@@ -27,6 +28,11 @@ public class GameField {
     
     public int GetHeight() {
     	return height;
+    }
+    
+    public void SetBaseCoords(Coordinates baseCoord)
+    {
+    	this.baseCoord = baseCoord;
     }
     
     // конструктор копирования..
@@ -93,6 +99,22 @@ public class GameField {
         System.out.println("input row and column for unit");
         int col = CheckInputService.inputInteger(width - 2, "Width input out of field");
         int row = CheckInputService.inputInteger(height - 2, "Height input out of field");
+        if(baseCoord.col == col && baseCoord.row == row)
+        {
+        	System.out.println("Base already exists at these coordinates. Can't add a new unit\n");
+        	return;
+        }
+        for (int i=0;i<listOfUnits.size(); i++)
+        {
+        	BaseUnit curr = listOfUnits.get(i);
+        	Coordinates currCoord = curr.getCoordinates();
+        	if(currCoord.row == row && currCoord.col == col)
+        	{
+        		System.out.println("Unit already exists at these coordinates. Can't add a new unit\n");
+        		return;
+        	}
+        }
+        
 
         boolean checkRowColumn = checkRowColumn(col, row);
         final boolean checkNumberOfUnits = checkNumberOfUnits();
@@ -118,7 +140,7 @@ public class GameField {
         }
     }
     
-    public void addBase(Base unit) {
+    public Coordinates addBase(Base unit) {
 
         System.out.println("input row and column for base");
         int col = CheckInputService.inputInteger(width - 2, "Width input out of field");
@@ -142,9 +164,12 @@ public class GameField {
             //cls();
             System.out.println("field after adding:");
             System.out.println(field);
+            return unitCoordinates;
         } else {
             System.out.println("Number of units > then can be or your row and col are incorrect");
+            return null;
         }
+        
     }
 
     public void deleteUnit() {
