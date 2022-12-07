@@ -3,16 +3,13 @@ package units;
 import supportingFiles.Coordinates;
 import supportingFiles.DirectionsOfMove;
 
-public class BaseUnit {
+public class BaseUnit  extends FieldObject{
 
-    protected String name;
-    protected String picture;
     protected int armour;
     protected int attack;
     protected int health;
     protected int longOfMove;
     protected int maxLongOfAttack;
-    protected Coordinates coordinates;
 
     public String getName() {
         return name;

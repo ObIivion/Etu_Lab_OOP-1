@@ -3,19 +3,30 @@ import supportingFiles.CheckInputService;
 import supportingFiles.Coordinates;
 import supportingFiles.DirectionsOfMove;
 import units.BaseUnit;
+import units.Base;
+import units.FieldObject;
 import java.util.ArrayList;
 
 public class GameField {
     private int width;
     private int height;
     private int numberOfUnits = 0;
-    private ArrayList<BaseUnit> listOfUnits = new ArrayList<BaseUnit>();
+    private ArrayList<FieldObject> listOfUnits = new ArrayList<FieldObject>();
+    
 
     private String field = "";
 
     public GameField(int height, int width) {
         this.height = height;
         this.width = width;
+    }
+    
+    public int GetWidth() {
+    	return width;
+    }
+    
+    public int GetHeight() {
+    	return height;
     }
     
     // конструктор копирования..
@@ -77,7 +88,7 @@ public class GameField {
         System.out.println(field);
     }
 
-    public void addUnit(BaseUnit unit) {
+    public void addUnit(FieldObject unit) {
 
         System.out.println("input row and column for unit");
         int col = CheckInputService.inputInteger(width - 2, "Width input out of field");
@@ -132,21 +143,21 @@ public class GameField {
         listOfUnits.remove(choice - 1);
     }
 
-    public void moveUnit() {
+    /*public void moveUnit() {
 
         showListOfUnits();
         System.out.println("chose unit to move (input number)");
 
         int choice = CheckInputService.inputInteger(listOfUnits.size(), "Incorrect input of unit");
 
-        BaseUnit unit = listOfUnits.get(choice - 1);
+        BaseUnit unit = (BaseUnit)listOfUnits.get(choice - 1);
         int col = listOfUnits.get(choice - 1).getCoordinates().col;
         int row = listOfUnits.get(choice - 1).getCoordinates().row;
         int indexToMove = ((width * 2 - 1) * row) + ((col * 2) + row);
 
         System.out.println("chose direction to move:\n1 - up\n2 - down\n3 - left\n4 - right");
 
-        int direction = CheckInputService.inputInteger(4/*listOfUnits.size()*/, "Incorrect input of direction");
+        int direction = CheckInputService.inputInteger(4, "Incorrect input of direction");
 
         int newIndex;
             switch (direction) {
@@ -196,7 +207,7 @@ public class GameField {
                 System.out.println("Input error");
                 break;
         }
-    }
+    }*/
 
     public static void cls() {
         try {

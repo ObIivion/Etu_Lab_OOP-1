@@ -17,7 +17,7 @@ public class Main {
         InfantryFactory infantryFactory = new InfantryFactory();
         ArcherFactory archerFactory = new ArcherFactory();
         CavalryFactory cavalryFactory = new CavalryFactory();
-        Base base1 = new Base();
+        Base base1 = null;
 
         startGameWrites();
 
@@ -32,18 +32,28 @@ public class Main {
 
             startMenuGame();
 
-            choice = CheckInputService.inputInteger(4, "Your input is out of range (1 - 4)");
+            choice = CheckInputService.inputInteger(5, "Your input is out of range (1 - 4)");
             switch (choice) {
                 case 1:
-                    base1.createUnit(gameField);
+                	if(base1 != null)
+                		base1.createUnit(gameField);
+                	else
+                		System.out.println("Build a base first\n");
                     break;
                 case 2:
+                	if(base1 != null)
                     base1.removeUnit(gameField);
+                    else
+                		System.out.println("Build a base first\n");
                     break;
                 case 3:
-                    gameField.moveUnit();
+                    //gameField.moveUnit();
                     break;
                 case 4:
+                	System.out.println("Enter a base's coordinates:\n");
+                	base1 = new Base(gameField);
+                	break;
+                case 5:
                     return;
                 default:
                     System.out.println("Error of Choice");
@@ -61,6 +71,6 @@ public class Main {
 
         System.out.println("MenuGame");
         System.out.println("Make your choice");
-        System.out.println("1 - Add unit\n2 - Remove unit\n3 - Move unit \n4 - Escape from the battle");
+        System.out.println("1 - Add unit\n2 - Remove unit\n3 - Move unit \n4 - Build a base \n5 - Escape from the battle");
     }
 }

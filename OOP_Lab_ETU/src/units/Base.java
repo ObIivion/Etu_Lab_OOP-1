@@ -8,9 +8,18 @@ import game.GameField;
 
 public class Base extends FieldObject {
 	protected int HP;
-	protected int maxUnit;
+	protected int maxUnit=7;
+	protected int unitsBuilt = 0;
 	
-	public void createUnit(GameField gameField){
+	public Base(GameField gameField){
+		gameField.addUnit(this);
+	}
+	
+	public int createUnit(GameField gameField){
+		if(unitsBuilt >= maxUnit) {
+			System.out.println("Max amount of units\n");
+			return unitsBuilt;
+		}
 		InfantryFactory infantryFactory = new InfantryFactory();
         ArcherFactory archerFactory = new ArcherFactory();
         CavalryFactory cavalryFactory = new CavalryFactory();
@@ -26,9 +35,11 @@ public class Base extends FieldObject {
                 switch (typeChoice) {
                     case 1:
                         gameField.addUnit(infantryFactory.createUnit(InfantryFactory.InfantryTypes.swordsMan));
+                        this.unitsBuilt++;
                         break;
                     case 2:
                         gameField.addUnit(infantryFactory.createUnit(InfantryFactory.InfantryTypes.spearMan));
+                        this.unitsBuilt++;
                         break;
                     default:
                         System.out.println("Error of typeChoice");
@@ -42,9 +53,11 @@ public class Base extends FieldObject {
                 switch (typeChoice) {
                     case 1:
                         gameField.addUnit(archerFactory.createUnit(ArcherFactory.ArcherTypes.longArcher));
+                        this.unitsBuilt++;
                         break;
                     case 2:
                         gameField.addUnit(archerFactory.createUnit(ArcherFactory.ArcherTypes.shortArcher));
+                        this.unitsBuilt++;
                         break;
                     default:
                         System.out.println("Error of typeChoice");
@@ -58,9 +71,11 @@ public class Base extends FieldObject {
                 switch (typeChoice) {
                     case 1:
                         gameField.addUnit(cavalryFactory.createUnit(CavalryFactory.CavalryTypes.shootCavalry));
+                        this.unitsBuilt++;
                         break;
                     case 2:
                         gameField.addUnit(cavalryFactory.createUnit(CavalryFactory.CavalryTypes.attackCavalry));
+                        this.unitsBuilt++;
                         break;
                     default:
                         System.out.println("Error of typeChoice");
@@ -69,11 +84,13 @@ public class Base extends FieldObject {
             default:
                 System.out.println("Error of typeChoice");
         	}
-        
+        return unitsBuilt;
         
 	}
 	
-	public void removeUnit(GameField gameField) {
+	public int removeUnit(GameField gameField) {
 		gameField.deleteUnit();
+		this.unitsBuilt--;
+		return unitsBuilt;
 	}
 }
