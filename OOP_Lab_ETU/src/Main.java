@@ -28,7 +28,7 @@ public class Main {
         gameField.drawField();
 
         int choice = 0;
-        while (choice != 4) {
+        while (choice != 5) {
 
             startMenuGame();
 
@@ -47,10 +47,9 @@ public class Main {
                 		System.out.println("Build a base first\n");
                     break;
                 case 3:
-                    //gameField.moveUnit();
+                    gameField.moveUnit();
                     break;
                 case 4:
-                	System.out.println("Enter a base's coordinates:\n");
                 	base1 = new Base(gameField);
                 	break;
                 case 5:

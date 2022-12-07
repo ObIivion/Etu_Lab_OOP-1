@@ -17,13 +17,6 @@ public class FieldObject {
         return picture;
     }
     
-    public int getLongOfMove() {
-        return longOfMove;
-    }
-
-    public int getMaxLongOfAttack() {
-        return maxLongOfAttack;
-    }
     
     public Coordinates getCoordinates() { return coordinates; }
     

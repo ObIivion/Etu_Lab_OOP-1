@@ -12,7 +12,8 @@ public class Base extends FieldObject {
 	protected int unitsBuilt = 0;
 	
 	public Base(GameField gameField){
-		gameField.addUnit(this);
+		this.picture = "B";
+		gameField.addBase(this);
 	}
 	
 	public int createUnit(GameField gameField){

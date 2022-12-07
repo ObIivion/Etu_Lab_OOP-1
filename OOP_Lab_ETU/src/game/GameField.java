@@ -11,7 +11,7 @@ public class GameField {
     private int width;
     private int height;
     private int numberOfUnits = 0;
-    private ArrayList<FieldObject> listOfUnits = new ArrayList<FieldObject>();
+    private ArrayList<BaseUnit> listOfUnits = new ArrayList<BaseUnit>();
     
 
     private String field = "";
@@ -88,7 +88,7 @@ public class GameField {
         System.out.println(field);
     }
 
-    public void addUnit(FieldObject unit) {
+    public void addUnit(BaseUnit unit) {
 
         System.out.println("input row and column for unit");
         int col = CheckInputService.inputInteger(width - 2, "Width input out of field");
@@ -102,6 +102,35 @@ public class GameField {
             Coordinates unitCoordinates = new Coordinates(row, col);
             unit.setCoordinates(unitCoordinates);
             listOfUnits.add(unit);
+
+            int index = ((width * 2 - 1) * unitCoordinates.row) + ((unitCoordinates.col * 2) + unitCoordinates.row);
+
+            char[] chars = field.toCharArray();
+            chars[index] = unit.getPicture().charAt(0);
+            String modifiedString =  new String(chars);
+            field = modifiedString;
+
+            //cls();
+            System.out.println("field after adding:");
+            System.out.println(field);
+        } else {
+            System.out.println("Number of units > then can be or your row and col are incorrect");
+        }
+    }
+    
+    public void addBase(Base unit) {
+
+        System.out.println("input row and column for base");
+        int col = CheckInputService.inputInteger(width - 2, "Width input out of field");
+        int row = CheckInputService.inputInteger(height - 2, "Height input out of field");
+
+        boolean checkRowColumn = checkRowColumn(col, row);
+        final boolean checkNumberOfUnits = checkNumberOfUnits();
+
+        if (checkNumberOfUnits && checkRowColumn) {
+
+            Coordinates unitCoordinates = new Coordinates(row, col);
+            unit.setCoordinates(unitCoordinates);
 
             int index = ((width * 2 - 1) * unitCoordinates.row) + ((unitCoordinates.col * 2) + unitCoordinates.row);
 
@@ -143,14 +172,14 @@ public class GameField {
         listOfUnits.remove(choice - 1);
     }
 
-    /*public void moveUnit() {
+    public void moveUnit() {
 
         showListOfUnits();
         System.out.println("chose unit to move (input number)");
 
         int choice = CheckInputService.inputInteger(listOfUnits.size(), "Incorrect input of unit");
 
-        BaseUnit unit = (BaseUnit)listOfUnits.get(choice - 1);
+        BaseUnit unit = listOfUnits.get(choice - 1);
         int col = listOfUnits.get(choice - 1).getCoordinates().col;
         int row = listOfUnits.get(choice - 1).getCoordinates().row;
         int indexToMove = ((width * 2 - 1) * row) + ((col * 2) + row);
@@ -207,7 +236,7 @@ public class GameField {
                 System.out.println("Input error");
                 break;
         }
-    }*/
+    }
 
     public static void cls() {
         try {
