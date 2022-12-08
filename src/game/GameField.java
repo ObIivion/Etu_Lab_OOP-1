@@ -111,7 +111,7 @@ public class GameField {
         cls();
         System.out.println(field);
     }
-    public void addUnit(BaseUnit unit) {
+    public boolean addUnit(BaseUnit unit) {
 
         System.out.println("input row and column for unit");
         int col = CheckInputService.inputInteger(width - 2, "Width input out of field");
@@ -119,14 +119,14 @@ public class GameField {
 
         if (baseCoord.col == col && baseCoord.row == row) {
             System.out.println("Base already exists at these coordinates. Can't add a new unit\n");
-            return;
+            return false;
         }
 
         for (BaseUnit curr : listOfUnits) {
             Coordinates currCoord = curr.getCoordinates();
             if (currCoord.row == row && currCoord.col == col) {
                 System.out.println("Unit already exists at these coordinates. Can't add a new unit\n");
-                return;
+                return false;
             }
         }
 
@@ -136,19 +136,24 @@ public class GameField {
         if (checkNumberOfUnits && checkRowColumn) {
 
             Coordinates unitCoordinates = new Coordinates(row, col);
+            int index = ((width * 2 - 1) * unitCoordinates.row) + ((unitCoordinates.col * 2) + unitCoordinates.row);
+            char[] chars = field.toCharArray();
+
+            if (chars[index] == landscapes[1].getPicture().toCharArray()[0] || chars[index] == landscapes[2].getPicture().toCharArray()[0]) {
+                System.out.println("You tried to place unit on unreal landscape");
+                return false;
+            }
+            chars[index] = unit.getPicture().charAt(0);
+            field = new String(chars);
             unit.setCoordinates(unitCoordinates);
             listOfUnits.add(unit);
 
-            int index = ((width * 2 - 1) * unitCoordinates.row) + ((unitCoordinates.col * 2) + unitCoordinates.row);
-
-            char[] chars = field.toCharArray();
-            chars[index] = unit.getPicture().charAt(0);
-            field = new String(chars);
-
             System.out.println("field after adding:");
             System.out.println(field);
+            return true;
         } else {
             System.out.println("Number of units > then can be or your row and col are incorrect");
+            return false;
         }
     }
 

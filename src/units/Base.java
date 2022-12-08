@@ -16,6 +16,7 @@ public class Base extends FieldObject {
         this.picture = "B";
         Coordinates coord = gameField.addBase(this);
         gameField.SetBaseCoords(coord);
+        HP = 10;
     }
 
     public int createUnit(GameField gameField){
@@ -36,17 +37,17 @@ public class Base extends FieldObject {
                 System.out.println("1 - SwordsMan\n2 - SpearMan");
                 int typeChoice = CheckInputService.inputInteger(2, "Your input is out of range (1 - 2)");
                 switch (typeChoice) {
-                    case 1:
-                        gameField.addUnit(infantryFactory.createUnit(InfantryFactory.InfantryTypes.swordsMan));
-                        this.unitsBuilt++;
-                        break;
-                    case 2:
+                    case 1 -> {
+                        final boolean successAdd = gameField.addUnit(infantryFactory.createUnit(InfantryFactory.InfantryTypes.swordsMan));
+                        if (successAdd) {
+                            this.unitsBuilt++;
+                        }
+                    }
+                    case 2 -> {
                         gameField.addUnit(infantryFactory.createUnit(InfantryFactory.InfantryTypes.spearMan));
                         this.unitsBuilt++;
-                        break;
-                    default:
-                        System.out.println("Error of typeChoice");
-                        break;
+                    }
+                    default -> System.out.println("Error of typeChoice");
                 }
                 break;
             case 2:
@@ -54,17 +55,15 @@ public class Base extends FieldObject {
                 System.out.println("1 - LongArcher\n2 - ShortArcher");
                 typeChoice = CheckInputService.inputInteger(2, "Your input is out of range (1 - 2)");
                 switch (typeChoice) {
-                    case 1:
+                    case 1 -> {
                         gameField.addUnit(archerFactory.createUnit(ArcherFactory.ArcherTypes.longArcher));
                         this.unitsBuilt++;
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         gameField.addUnit(archerFactory.createUnit(ArcherFactory.ArcherTypes.shortArcher));
                         this.unitsBuilt++;
-                        break;
-                    default:
-                        System.out.println("Error of typeChoice");
-                        break;
+                    }
+                    default -> System.out.println("Error of typeChoice");
                 }
                 break;
             case 3:
@@ -72,17 +71,15 @@ public class Base extends FieldObject {
                 System.out.println("1 - ShootCavalry\n2 - AttackCavalry");
                 typeChoice = CheckInputService.inputInteger(2, "Your input is out of range (1 - 2)");
                 switch (typeChoice) {
-                    case 1:
+                    case 1 -> {
                         gameField.addUnit(cavalryFactory.createUnit(CavalryFactory.CavalryTypes.shootCavalry));
                         this.unitsBuilt++;
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         gameField.addUnit(cavalryFactory.createUnit(CavalryFactory.CavalryTypes.attackCavalry));
                         this.unitsBuilt++;
-                        break;
-                    default:
-                        System.out.println("Error of typeChoice");
-                        break;
+                    }
+                    default -> System.out.println("Error of typeChoice");
                 }
             default:
                 System.out.println("Error of typeChoice");
