@@ -6,8 +6,6 @@ public class FieldObject {
     protected Coordinates coordinates;
     protected String name;
     protected String picture;
-    protected int longOfMove;
-    protected int maxLongOfAttack;
 
     public String getName() {
         return name;

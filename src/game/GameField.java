@@ -9,6 +9,7 @@ import units.LandscapeObjects.FieldLandscape;
 import units.LandscapeObjects.MountainLandscape;
 import units.LandscapeObjects.WaterLandscape;
 import java.util.ArrayList;
+import units.NeutralObjects.*;
 
 public class GameField {
     private int width;
@@ -16,7 +17,7 @@ public class GameField {
     private int numberOfUnits = 0;
     private Coordinates baseCoord;
     private ArrayList<BaseUnit> listOfUnits = new ArrayList<>();
-    private FieldObject[] landscapes = new FieldObject[3];
+    private FieldObject[] landscapes = new FieldObject[7];
 
 
     private String field = "";
@@ -27,6 +28,10 @@ public class GameField {
         landscapes[0] = new FieldLandscape();
         landscapes[1] = new MountainLandscape();
         landscapes[2] = new WaterLandscape();
+        landscapes[3] = new AcidPool();
+        landscapes[4] = new Fog();
+        landscapes[5] = new Tavern();
+        landscapes[6] = new Trap();
     }
 
     public void SetBaseCoords(Coordinates baseCoord)
@@ -67,7 +72,7 @@ public class GameField {
                 } else if (i == 0 || j == 0 || i == height-1) {
                     field += "X ";
                 } else {
-                    randomIndex = (int) (Math.random() * 3);
+                    randomIndex = (int) (Math.random() * 7);
                     objImage = landscapes[randomIndex].getPicture();
                     field += objImage + " ";
                 }
@@ -96,8 +101,45 @@ public class GameField {
     private void moveUnit(BaseUnit unit, int indexToMove, int newIndex) {
 
         char[] chars = field.toCharArray();
+        
+        switch (chars[newIndex]) {
+        
+		case '~':
+			 System.out.println("Oops, new your location is water, unit has drowned");
+	         chars[indexToMove] = '*';
+	         field = new String(chars);
+	            //написать фунцию удаления юнита из списка
+	         deleteUnit(unit);
+			break;
+		case '^':
+            System.out.println("Your new location is Mountain, unit can't climb the mountain");
+            System.out.println("Field stay without changes");
+			break;
+		case 'P':
+			Context contAcid = new Context(new AcidPool());
+			contAcid.ExecuteStrategy(unit);
+			break;
+		case 'F':
+			Context contFog = new Context(new Fog());
+			contFog.ExecuteStrategy(unit);
+			break;
+		case 'T':
+			Context contTavern = new Context(new Tavern());
+			contTavern.ExecuteStrategy(unit);
+			break;
+		case 'v':
+			Context contTrap = new Context(new Trap());
+			contTrap.ExecuteStrategy(unit);
+			break;
 
-        if (chars[newIndex] == landscapes[2].getPicture().toCharArray()[0]) {
+		default:
+			chars[indexToMove] = '*';
+            chars[newIndex] = unit.getPicture().charAt(0);
+            field = new String(chars);
+            System.out.println("field after move:");
+		}
+
+        /*if (chars[newIndex] == landscapes[2].getPicture().toCharArray()[0]) {
 
             System.out.println("Oops, new your location is water, unit has drowned");
             chars[indexToMove] = '*';
@@ -107,12 +149,15 @@ public class GameField {
         } else if (chars[newIndex] == landscapes[1].getPicture().toCharArray()[0]) {
             System.out.println("Your new location is Mountain, unit can't climb the mountain");
             System.out.println("Field stay without changes");
-        } else {
+        } 
+        
+        else
+        	{
             chars[indexToMove] = '*';
             chars[newIndex] = unit.getPicture().charAt(0);
             field = new String(chars);
             System.out.println("field after move:");
-        }
+        }*/
 
         cls();
         System.out.println(field);
