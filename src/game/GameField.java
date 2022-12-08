@@ -46,11 +46,11 @@ public class GameField {
     }
 
     private boolean checkNumberOfUnits() {
-        return numberOfUnits > ((height * width) / 2) ? false : true;
+        return numberOfUnits <= ((height * width) / 2);
     }
 
     private boolean checkRowColumn(int column, int row) {
-        return column >= width || row >= height ? false : true;
+        return column < width && row < height;
     }
 
     public void drawField() {
