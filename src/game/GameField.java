@@ -79,11 +79,17 @@ public class GameField {
 
     }
 
-    private void showListOfUnits() {
+    private boolean showListOfUnits() {
 
         System.out.println("List of units");
-        for (int i=0; i<listOfUnits.size(); i++) {
-            System.out.println((i + 1) + " - " + listOfUnits.get(i).getName() + " - row: " + listOfUnits.get(i).getCoordinates().row + " - col " + listOfUnits.get(i).getCoordinates().col);
+        if (listOfUnits.size() == 0) {
+            System.out.println("List of units is empty");
+            return false;
+        } else {
+            for (int i = 0; i < listOfUnits.size(); i++) {
+                System.out.println((i + 1) + " - " + listOfUnits.get(i).getName() + " - row: " + listOfUnits.get(i).getCoordinates().row + " - col " + listOfUnits.get(i).getCoordinates().col);
+            }
+            return true;
         }
     }
 
@@ -179,25 +185,27 @@ public class GameField {
 
     public void deleteUnit() {
 
-        showListOfUnits();
-        System.out.println("chose what unit you wanna delete (input number)");
+        if (showListOfUnits()) {
 
-        int choice = CheckInputService.inputInteger(listOfUnits.size(), "Incorrect input of unit");
+            System.out.println("chose what unit you wanna delete (input number)");
 
-        int col = listOfUnits.get(choice - 1).getCoordinates().col;
-        int row = listOfUnits.get(choice - 1).getCoordinates().row;
+            int choice = CheckInputService.inputInteger(listOfUnits.size(), "Incorrect input of unit");
 
-        int indexToDelete = ((width * 2 - 1) * row) + ((col * 2) + row);
+            int col = listOfUnits.get(choice - 1).getCoordinates().col;
+            int row = listOfUnits.get(choice - 1).getCoordinates().row;
 
-        char[] chars = field.toCharArray();
-        chars[indexToDelete] = ' ';
-        field = new String(chars);
+            int indexToDelete = ((width * 2 - 1) * row) + ((col * 2) + row);
 
-        cls();
-        System.out.println("field after delete:");
-        System.out.println(field);
+            char[] chars = field.toCharArray();
+            chars[indexToDelete] = ' ';
+            field = new String(chars);
 
-        listOfUnits.remove(choice - 1);
+            cls();
+            System.out.println("field after delete:");
+            System.out.println(field);
+
+            listOfUnits.remove(choice - 1);
+        }
     }
 
     // удаление известно какого юнита из списка юнитов и с поля
@@ -220,62 +228,63 @@ public class GameField {
 
     public void moveUnit() {
 
-        showListOfUnits();
-        System.out.println("chose unit to move (input number)");
+        if (showListOfUnits()) {
+            System.out.println("chose unit to move (input number)");
 
-        int choice = CheckInputService.inputInteger(listOfUnits.size(), "Incorrect input of unit");
+            int choice = CheckInputService.inputInteger(listOfUnits.size(), "Incorrect input of unit");
 
-        BaseUnit unit = listOfUnits.get(choice - 1);
-        int col = listOfUnits.get(choice - 1).getCoordinates().col;
-        int row = listOfUnits.get(choice - 1).getCoordinates().row;
-        int indexToMove = ((width * 2 - 1) * row) + ((col * 2) + row);
+            BaseUnit unit = listOfUnits.get(choice - 1);
+            int col = listOfUnits.get(choice - 1).getCoordinates().col;
+            int row = listOfUnits.get(choice - 1).getCoordinates().row;
+            int indexToMove = ((width * 2 - 1) * row) + ((col * 2) + row);
 
-        System.out.println("chose direction to move:\n1 - up\n2 - down\n3 - left\n4 - right");
+            System.out.println("chose direction to move:\n1 - up\n2 - down\n3 - left\n4 - right");
 
-        int direction = CheckInputService.inputInteger(4, "Incorrect input of direction");
+            int direction = CheckInputService.inputInteger(4, "Incorrect input of direction");
 
-        int newIndex;
-        switch (direction) {
-            case 1 -> {
-                newIndex = indexToMove - ((width * 2) * unit.getLongOfMove());
-                if (newIndex < width) {
-                    System.out.println("new unit position is out of field");
-                } else {
-                    moveUnit(unit, indexToMove, newIndex);
-                    listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.UP);
+            int newIndex;
+            switch (direction) {
+                case 1 -> {
+                    newIndex = indexToMove - ((width * 2) * unit.getLongOfMove());
+                    if (newIndex < width) {
+                        System.out.println("new unit position is out of field");
+                    } else {
+                        moveUnit(unit, indexToMove, newIndex);
+                        listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.UP);
+                    }
                 }
-            }
-            case 2 -> {
-                newIndex = indexToMove + ((width * 2) * unit.getLongOfMove());
-                System.out.println("Index to move - " + indexToMove + ", newIndex = " + newIndex);
-                if (newIndex > field.length() - width) {
-                    System.out.println("new unit position is out of field");
-                } else {
-                    moveUnit(unit, indexToMove, newIndex);
-                    listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.DOWN);
+                case 2 -> {
+                    newIndex = indexToMove + ((width * 2) * unit.getLongOfMove());
+                    System.out.println("Index to move - " + indexToMove + ", newIndex = " + newIndex);
+                    if (newIndex > field.length() - width) {
+                        System.out.println("new unit position is out of field");
+                    } else {
+                        moveUnit(unit, indexToMove, newIndex);
+                        listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.DOWN);
+                    }
                 }
-            }
-            case 3 -> {
-                newIndex = indexToMove - unit.getLongOfMove() * 2;
-                System.out.println("Index to move - " + indexToMove + ", newIndex = " + newIndex);
-                if (newIndex / (width + 1) == 1) {
-                    System.out.println("new unit position is out of field");
-                } else {
-                    moveUnit(unit, indexToMove, newIndex);
-                    listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.LEFT);
+                case 3 -> {
+                    newIndex = indexToMove - unit.getLongOfMove() * 2;
+                    System.out.println("Index to move - " + indexToMove + ", newIndex = " + newIndex);
+                    if (newIndex / (width + 1) == 1) {
+                        System.out.println("new unit position is out of field");
+                    } else {
+                        moveUnit(unit, indexToMove, newIndex);
+                        listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.LEFT);
+                    }
                 }
-            }
-            case 4 -> {
-                newIndex = indexToMove + unit.getLongOfMove() * 2;
-                System.out.println("Index to move - " + indexToMove + ", newIndex = " + newIndex);
-                if (newIndex / width == 1) {
-                    System.out.println("new unit position is out of field");
-                } else {
-                    moveUnit(unit, indexToMove, newIndex);
-                    listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.RIGHT);
+                case 4 -> {
+                    newIndex = indexToMove + unit.getLongOfMove() * 2;
+                    System.out.println("Index to move - " + indexToMove + ", newIndex = " + newIndex);
+                    if (newIndex / width == 1) {
+                        System.out.println("new unit position is out of field");
+                    } else {
+                        moveUnit(unit, indexToMove, newIndex);
+                        listOfUnits.get(choice - 1).changeLocation(DirectionsOfMove.RIGHT);
+                    }
                 }
+                default -> System.out.println("Input error");
             }
-            default -> System.out.println("Input error");
         }
     }
 
