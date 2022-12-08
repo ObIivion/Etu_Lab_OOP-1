@@ -18,9 +18,17 @@ public class BaseUnit  extends FieldObject{
     public int getArmour() {
         return armour;
     }
+    
+    public void setArmour(int armor) {
+    	this.armour = armor;
+    }
 
     public int getHealth() {
         return health;
+    }
+    
+    public void setHealth(int hp) {
+    	this.health = hp;
     }
 
     public int getAttack() {
@@ -33,6 +41,10 @@ public class BaseUnit  extends FieldObject{
 
     public int getLongOfMove() {
         return longOfMove;
+    }
+    
+    public void setLongOfMove(int lom) {
+    	this.longOfMove = lom;
     }
 
     public int getMaxLongOfAttack() {
