@@ -54,7 +54,6 @@ public class Main {
     }
 
     private static void startGameWrites() {
-
         System.out.println("Start game");
         System.out.println("Set height and width of field");
     }
