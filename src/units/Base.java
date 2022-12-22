@@ -7,11 +7,24 @@ import supportingFiles.CheckInputService;
 import game.GameField;
 import supportingFiles.Coordinates;
 
-public class Base extends FieldObject {
-    protected int HP;
-    protected int maxUnit=7;
-    protected int unitsBuilt = 0;
+/*
+ * \brief база юнитов: создает юнитов и следит за состоянием юнитов
+ * \version 1.0
+ * \date ноябрь 2022
+ * 
+ * Класс. отвечающий за инициализацию юнитов: 
+ * создает юниты, и реагирует на их удаление.
+ * Следит за количеством юнитов, оно не может превышать максимальное число.
+ * 
+ * 
+ */
 
+public class Base extends FieldObject {
+    protected int HP; ///< Здоровье базы
+    protected int maxUnit=7; ///< макс. число юнитов - 7 шт.
+    protected int unitsBuilt = 0; ///< сколько юнитов находится на поле
+
+    /// конструктор базы, задает символ на поле и записывает координаты базы на поле
     public Base(GameField gameField){
         this.picture = "B";
         Coordinates coord = gameField.addBase(this);
@@ -19,6 +32,7 @@ public class Base extends FieldObject {
         HP = 10;
     }
 
+    /// создать юнита, количество юнитоа увеличивается
     public int createUnit(GameField gameField){
         if(unitsBuilt >= maxUnit) {
             System.out.println("Max amount of units\n");
@@ -88,6 +102,7 @@ public class Base extends FieldObject {
 
     }
 
+    /// реакция при удалении юнита, уменьшает количество юнитов
     public int removeUnit(GameField gameField) {
         gameField.deleteUnit();
         this.unitsBuilt--;
