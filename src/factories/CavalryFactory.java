@@ -21,7 +21,10 @@ public class CavalryFactory {
         attackCavalry
     } ///< Виды кавалерии
 
-    /// создание кавалерии
+    /**
+    * /brief создание кавалерии.
+    * @param cavalryType - тип кавалерии
+    */
     public Cavalry createUnit(CavalryTypes cavalryType) {
         switch (cavalryType) {
             case shootCavalry:

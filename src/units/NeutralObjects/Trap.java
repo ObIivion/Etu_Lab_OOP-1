@@ -18,7 +18,10 @@ public class Trap extends NeutralObject{
 		this.value = 3;
 		this.picture = "v";
 	}
-	///взаимодействие юнита с объектом - уменьшение злоровья на value
+    /**
+    * /brief взаимодействие юнита с объектом - уменьшение злоровья на value
+    * @param interactable - информация о юните, попавшем на поле
+    */
 	public int UnitInteract(BaseUnit interactable){
 		System.out.println("Unit stepped into trap, HP decreased by " + value +"\n");
 		int unitHP = interactable.getHealth();

@@ -32,7 +32,10 @@ public class Base extends FieldObject {
         HP = 10;
     }
 
-    /// создать юнита, количество юнитоа увеличивается
+    /**
+    * /brief создать юнита, количество юнитоа увеличивается.
+    * @param gamefield - информация о поле
+    */
     public int createUnit(GameField gameField){
         if(unitsBuilt >= maxUnit) {
             System.out.println("Max amount of units\n");
@@ -102,7 +105,10 @@ public class Base extends FieldObject {
 
     }
 
-    /// реакция при удалении юнита, уменьшает количество юнитов
+    /**
+    * /brief реакция при удалении юнита, уменьшает количество юнитов.
+    * @param gamefield - информация о поле
+    */
     public int removeUnit(GameField gameField) {
         gameField.deleteUnit();
         this.unitsBuilt--;

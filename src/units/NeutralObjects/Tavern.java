@@ -19,7 +19,10 @@ public class Tavern extends NeutralObject{
 		this.picture = "T";
 	}
 	
-	///взаимодействие объекта с объектом - увеличение здоровья на value
+    /**
+    * /brief взаимодействие объекта с объектом - увеличение здоровья на value
+    * @param interactable - информация о юните, попавшем на поле
+    */
 	public int UnitInteract(BaseUnit interactable){
 		System.out.println("Unit stepped into tavern, HP increased by " + value +"\n");
 		int unitHP = interactable.getHealth();

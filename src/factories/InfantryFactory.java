@@ -21,7 +21,10 @@ public class InfantryFactory {
         spearMan
     } ///< Виды пехоты
 
-    ///создание пехоты
+    /**
+    * /brief создание пехоты.
+    * @param archerType - тип пехоты
+    */
     public Infantry createUnit(InfantryTypes infantryType) {
         switch (infantryType) {
             case swordsMan:

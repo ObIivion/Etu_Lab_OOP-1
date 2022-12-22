@@ -16,19 +16,29 @@ import units.BaseUnit;
 public class Context {
 	private NeutralObject strategy;
 	
-	///конструктор контекста, инициализирует стратегию
+    /**
+    * /brief конструктор контекста, инициализирует стратегию.
+    * @param str - стратегия
+    */
 	public Context(NeutralObject str)
 	{
 		this.strategy = str;
 	}
 	
-	///изменение стратегии на новую
+    /**
+    * /brief изменение стратегии на новую.
+    * @param str - стратегия
+    */
 	public void setStrategy(NeutralObject str )
 	{
 		this.strategy = null;
 		this.strategy = str;
 	}
-	///выполнение выбранной стратегии
+
+    /**
+    * /brief выполнение выбранной стратегии.
+    * @param interactable - информация о юните, попавшем на поле
+    */
 	public void ExecuteStrategy(BaseUnit interactable)
 	{
 		this.strategy.UnitInteract(interactable);

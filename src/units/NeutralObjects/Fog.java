@@ -19,6 +19,10 @@ public class Fog extends NeutralObject{
 		this.picture = "F";
 	}
 	///взаимодействие юнита с объектом - теряет value от длины хода
+    /**
+    * /brief взаимодействие юнита с объектом - теряет value от его брони.
+    * @param interactable - информация о юните, попавшем на поле
+    */
 	public int UnitInteract(BaseUnit interactable) {
 		System.out.println("Unit stepped into fog, visibility decreased by " + value +"\n");
 		int unitLoM = interactable.getLongOfMove();
