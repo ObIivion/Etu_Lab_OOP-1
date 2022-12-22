@@ -1,5 +1,13 @@
 package supportingFiles;
 
+/**
+ * 	\brief Класс для хранения цветов, применяемых к символам при выводе в консоль
+ * 	\version 1.0
+ * 	\date Ноябрь 2022
+ *
+ * 	Класс для хранения цветов, применяемых к символам при выводе в консоль
+ *
+ */
 public class ConsoleColors {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset

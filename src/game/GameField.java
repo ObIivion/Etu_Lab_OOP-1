@@ -11,17 +11,26 @@ import units.LandscapeObjects.WaterLandscape;
 import java.util.ArrayList;
 import units.NeutralObjects.*;
 
+/**
+ * 	\brief Класс игрового поля
+ * 	\version 1.0
+ * 	\date Ноябрь 2022
+ *
+ * 	Класс, для управления игровым полем: создание поля с ландшафтом, добавление/удаление юнитов,
+ * 	перемещение юнитов, добавления базы, взаимодействия юнитов с объектами ландшафта.
+ */
+
 public class GameField {
-    private int width;
-    private int height;
-    private int numberOfUnits = 0;
-    private Coordinates baseCoord;
-    private ArrayList<BaseUnit> listOfUnits = new ArrayList<>();
-    private FieldObject[] landscapes = new FieldObject[7];
+    private int width; ///< длина поля
+    private int height; ///< высота поля
+    private int numberOfUnits = 0; ///< хранит число юнитов на поле
+    private Coordinates baseCoord; ///< координаты базы на поле
+    private ArrayList<BaseUnit> listOfUnits = new ArrayList<>(); ///< список юнитов на поле
+    private FieldObject[] landscapes = new FieldObject[7]; ///< список ландшафтов для генерации поля с ландшафтом
 
+    private String field = ""; ///< строка, которая по сути представяет из себя поле
 
-    private String field = "";
-
+    /// конструктор создания поля
     public GameField(int height, int width) {
         this.height = height;
         this.width = width;
@@ -34,12 +43,13 @@ public class GameField {
         landscapes[6] = new Trap();
     }
 
+    /// сеттер для координаты базы
     public void SetBaseCoords(Coordinates baseCoord)
     {
         this.baseCoord = baseCoord;
     }
 
-    // конструктор копирования..
+    /// конструктор копирования поля
     public GameField(GameField gameField){
         this.width = gameField.width;
         this.height = gameField.height;
@@ -50,14 +60,17 @@ public class GameField {
         this.landscapes = gameField.landscapes;
     }
 
+    /// проверка возможности добавления нового юнита в зависимости от их текущего количества и размера самого поля
     private boolean checkNumberOfUnits() {
         return numberOfUnits <= ((height * width) / 2);
     }
 
+    /// проверка, попадают ли переданные координаты в созданное поле, если координаты не попадают в поле - возвращает false
     private boolean checkRowColumn(int column, int row) {
         return column < width && row < height;
     }
 
+    /// функция для отрисовки поля в консоли
     public void drawField() {
 
         String objImage;
@@ -84,6 +97,7 @@ public class GameField {
 
     }
 
+    /// вывод в консоли списка юнитов с координатами
     private boolean showListOfUnits() {
 
         System.out.println("List of units");
@@ -98,6 +112,7 @@ public class GameField {
         }
     }
 
+    /// функция для перемещения переданного юнита
     private void moveUnit(BaseUnit unit, int indexToMove, int newIndex) {
 
         char[] chars = field.toCharArray();
@@ -108,7 +123,6 @@ public class GameField {
 			 System.out.println("Oops, new your location is water, unit has drowned");
 	         chars[indexToMove] = '*';
 	         field = new String(chars);
-	            //написать фунцию удаления юнита из списка
 	         deleteUnit(unit);
 			break;
 		case '^':
@@ -139,29 +153,14 @@ public class GameField {
             System.out.println("field after move:");
 		}
 
-        /*if (chars[newIndex] == landscapes[2].getPicture().toCharArray()[0]) {
-
-            System.out.println("Oops, new your location is water, unit has drowned");
-            chars[indexToMove] = '*';
-            field = new String(chars);
-            //написать фунцию удаления юнита из списка
-            deleteUnit(unit);
-        } else if (chars[newIndex] == landscapes[1].getPicture().toCharArray()[0]) {
-            System.out.println("Your new location is Mountain, unit can't climb the mountain");
-            System.out.println("Field stay without changes");
-        } 
-        
-        else
-        	{
-            chars[indexToMove] = '*';
-            chars[newIndex] = unit.getPicture().charAt(0);
-            field = new String(chars);
-            System.out.println("field after move:");
-        }*/
-
         cls();
         System.out.println(field);
     }
+
+    /**
+     * /brief функция добавления юнита на поле
+     * @param unit - юнит
+     */
     public boolean addUnit(BaseUnit unit) {
 
         System.out.println("input row and column for unit");
@@ -208,6 +207,10 @@ public class GameField {
         }
     }
 
+    /**
+     * /brief функция добавления базы на поле
+     * @param base - база
+     */
     public Coordinates addBase(Base base) {
 
         System.out.println("input row and column for base");
@@ -228,6 +231,9 @@ public class GameField {
             return unitCoordinates;
     }
 
+    /**
+     * /brief функция удаления юнита
+     */
     public void deleteUnit() {
 
         if (showListOfUnits()) {
@@ -253,7 +259,10 @@ public class GameField {
         }
     }
 
-    // удаление известно какого юнита из списка юнитов и с поля
+    /**
+     * /brief удаление переданного в функцию юнита с поля и из списка юнитов
+     * @param unit - юнит
+     */
     public void deleteUnit(BaseUnit unit) {
         int col = unit.getCoordinates().col;
         int row = unit.getCoordinates().col;
@@ -271,6 +280,9 @@ public class GameField {
         listOfUnits.remove(listOfUnits.indexOf(unit));
     }
 
+    /**
+     * /brief функция для перемещения юнита. Выбор юнита для пемещения происходит внутри функции
+     */
     public void moveUnit() {
 
         if (showListOfUnits()) {
@@ -333,6 +345,9 @@ public class GameField {
         }
     }
 
+    /**
+     * /brief костыль для очищения консоли
+     */
     public static void cls() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();

@@ -2,12 +2,23 @@ import game.GameField;
 import supportingFiles.CheckInputService;
 import units.Base;
 
+/**
+ * 	\brief Класс - точка входа в программу. Для взаимодействия пользователя с игрой через меню
+ * 	\version 1.0
+ * 	\date Ноябрь 2022
+ *
+ * 	Основной класс для взаимодействия пользователя с игрой с помощью меню.
+ * 	В этом классе создаётся объект поля и с помощью него пользователь может взаимодействовать с полем
+ *
+ */
+
 public class Main {
     public static void main(String[] args) {
 
         gameMenu();
     }
 
+    /// функция, предоставляющая пользователю возможность взаимодействовать с игрой с помощью меню
     private static void gameMenu() {
 
         Base base1 = null;

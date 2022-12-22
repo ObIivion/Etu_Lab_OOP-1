@@ -1,5 +1,13 @@
 package units.cavalry;
 
+/**
+ * 	\brief Класс стреляющей кавалерим, отличается повышенной атакой
+ * 	\version 1.0
+ * 	\date Ноябрь 2022
+ *
+ * 	Класс стреляющей кавалерим, отличается повышенной атакой
+ *
+ */
 public class ShootCavalry extends Cavalry {
 
     public ShootCavalry() {

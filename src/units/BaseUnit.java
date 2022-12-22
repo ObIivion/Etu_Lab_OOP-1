@@ -3,14 +3,26 @@ package units;
 import supportingFiles.Coordinates;
 import supportingFiles.DirectionsOfMove;
 
+
+/**
+ * 	\brief Базовый класс для всех юнитов
+ * 	\version 1.0
+ * 	\date Ноябрь 2022
+ *
+ * 	Класс почти не несёт в себе смысловой нагрузки, создан для того, чтобы от него наследовались все юниты на игровом поле
+ *
+ */
+
+
 public class BaseUnit  extends FieldObject{
 
-    protected int armour;
-    protected int attack;
-    protected int health;
-    protected int longOfMove;
-    protected int maxLongOfAttack;
+    protected int armour; ///< Число, обозначающее броню юнита
+    protected int attack; ///< Число, обозначающее атаку юнита
+    protected int health; ///< Число, обозначающее здоровье юнита
+    protected int longOfMove; ///< Число, обозначающее количество клеток, на которое пермещается юнит за 1 ход
+    protected int maxLongOfAttack; ///< Число, обозначающее максимальное число клеток, на которое может атаковать юнит юнита
 
+    /// геттер назваиня юнита
     public String getName() {
         return name;
     }
@@ -18,7 +30,7 @@ public class BaseUnit  extends FieldObject{
     public int getArmour() {
         return armour;
     }
-    
+
     public void setArmour(int armor) {
     	this.armour = armor;
     }
@@ -26,7 +38,7 @@ public class BaseUnit  extends FieldObject{
     public int getHealth() {
         return health;
     }
-    
+
     public void setHealth(int hp) {
     	this.health = hp;
     }
@@ -53,6 +65,10 @@ public class BaseUnit  extends FieldObject{
 
     public Coordinates getCoordinates() { return coordinates; }
 
+    /**
+     * /brief функция, которая меняет собстенные координаты юнита в соответствии с выбранным направлением
+     * @param direction - параметр направления перемещения юнита
+     */
     public void changeLocation(DirectionsOfMove direction) {
         switch (direction) {
             case UP:
@@ -67,7 +83,6 @@ public class BaseUnit  extends FieldObject{
             case RIGHT:
                 this.coordinates.col += longOfMove;
                 break;
-
         }
     }
 
