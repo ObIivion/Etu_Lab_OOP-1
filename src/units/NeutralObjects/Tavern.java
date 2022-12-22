@@ -1,14 +1,12 @@
 package units.NeutralObjects;
 import units.BaseUnit;
 
-/*
+/**
  * \brief таверна
  * \version 1.0
  * \date ноябрь 2022
  * 
  * Класс. представляющий тавернк: при попадании юнита на клетку с таверной, он восстанавливает здоровье.
- * 
- * 
  */
 
 public class Tavern extends NeutralObject{

@@ -8,7 +8,6 @@ import supportingFiles.Coordinates;
  * 	\date Ноябрь 2022
  *
  * 	Класс почти не несёт в себе смысловой нагрузки, создан для того, чтобы от него наследовались все объекты на игровом поле
- *
  */
 
 public class FieldObject {

@@ -1,14 +1,12 @@
 package units.NeutralObjects;
 import units.BaseUnit;
 
-/*
+/**
  * \brief ловушка
  * \version 1.0
  * \date ноябрь 2022
  * 
  * Класс. представляющий ловушку: при попадании юнита на клетку с ловушкой, он теряет здоровье.
- * 
- * 
  */
 
 public class Trap extends NeutralObject{

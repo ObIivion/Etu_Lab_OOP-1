@@ -4,14 +4,12 @@ import units.infantry.Infantry;
 import units.infantry.SpearMan;
 import units.infantry.SwordsMan;
 
-/*
+/**
  * \brief фабрика лучников
  * \version 1.0
  * \date ноябрь 2022
  * 
  * Класс-фабрика. отвечающий за создание юнита-пехоты.
- * 
- * 
  */
 
 public class InfantryFactory {
@@ -23,7 +21,7 @@ public class InfantryFactory {
 
     /**
     * /brief создание пехоты.
-    * @param archerType - тип пехоты
+    * @param infantryType - тип пехоты
     */
     public Infantry createUnit(InfantryTypes infantryType) {
         switch (infantryType) {

@@ -3,14 +3,12 @@ package units.NeutralObjects;
 import units.BaseUnit;
 import units.FieldObject;
 
-/*
+/**
  * \brief нейтральный объект
  * \version 1.0
  * \date ноябрь 2022
  * 
  * Класс. представляющий нейтральный объект: является родителем остальных нейтральных объектов.
- * 
- * 
  */
 
 public class NeutralObject extends FieldObject {

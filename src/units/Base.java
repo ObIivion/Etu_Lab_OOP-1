@@ -7,7 +7,7 @@ import supportingFiles.CheckInputService;
 import game.GameField;
 import supportingFiles.Coordinates;
 
-/*
+/**
  * \brief база юнитов: создает юнитов и следит за состоянием юнитов
  * \version 1.0
  * \date ноябрь 2022
@@ -15,8 +15,6 @@ import supportingFiles.Coordinates;
  * Класс. отвечающий за инициализацию юнитов: 
  * создает юниты, и реагирует на их удаление.
  * Следит за количеством юнитов, оно не может превышать максимальное число.
- * 
- * 
  */
 
 public class Base extends FieldObject {
@@ -34,7 +32,7 @@ public class Base extends FieldObject {
 
     /**
     * /brief создать юнита, количество юнитоа увеличивается.
-    * @param gamefield - информация о поле
+    * @param gameField - информация о поле
     */
     public int createUnit(GameField gameField){
         if(unitsBuilt >= maxUnit) {
@@ -107,7 +105,7 @@ public class Base extends FieldObject {
 
     /**
     * /brief реакция при удалении юнита, уменьшает количество юнитов.
-    * @param gamefield - информация о поле
+    * @param gameField - информация о поле
     */
     public int removeUnit(GameField gameField) {
         gameField.deleteUnit();

@@ -1,15 +1,12 @@
 package units.LandscapeObjects;
 import units.FieldObject;
 
-/*
+/**
  * \brief ландшафт - поле
  * \version 1.0
  * \date ноябрь 2022
  * 
  * Класс. представляющий поле карты
- * 
- * 
- * 
  */
 
 public class FieldLandscape extends FieldObject {

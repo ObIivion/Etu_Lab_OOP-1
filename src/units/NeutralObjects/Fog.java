@@ -1,14 +1,12 @@
 package units.NeutralObjects;
 import units.BaseUnit;
 
-/*
+/**
  * \brief кислота
  * \version 1.0
  * \date ноябрь 2022
  * 
  * Класс. туман: при попадании юнита на клетку с туманом, он хуже видит и его скорость перемещения уменьшается.
- * 
- * 
  */
 
 public class Fog extends NeutralObject{
