@@ -12,6 +12,7 @@ import units.BaseUnit;
  */
 
 public class Fog extends NeutralObject{
+	/// конструктор, задает символ и value объектв
 	public Fog()
 	{
 		this.value = 2;

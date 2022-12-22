@@ -20,7 +20,7 @@ public class ArcherFactory {
         shortArcher
     } ///< Виды лучников
 
-    /// создание юнита
+    /// создание лучника
     public Archer createUnit(ArcherTypes archerType) {
         switch (archerType) {
             case longArcher:

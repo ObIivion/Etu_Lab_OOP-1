@@ -12,6 +12,7 @@ import units.BaseUnit;
  */
 
 public class Trap extends NeutralObject{
+	/// конструктор, задает символ и value объектв
 	public Trap()
 	{
 		this.value = 3;

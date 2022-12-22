@@ -12,6 +12,7 @@ import units.BaseUnit;
  */
 
 public class Tavern extends NeutralObject{
+	/// конструктор, задает символ и value объектв
 	public Tavern()
 	{
 		this.value = 3;
